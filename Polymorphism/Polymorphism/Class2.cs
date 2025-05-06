@@ -20,7 +20,7 @@ namespace Polymorphism
         
         public void Show3()
         {
-            base.Show2();//you can call by using base keyword parent version of method even thoug if you overrriden it.
+            base.Show2();//you can call  parent class method after reimplementing by using base keyword parent version of method even thoug if you overrriden it.
         }
     }
 }

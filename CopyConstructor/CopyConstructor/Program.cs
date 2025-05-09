@@ -8,7 +8,7 @@
             CopyConDemo obj1 = new CopyConDemo(105);
             Console.WriteLine(obj1);
             obj1.Display();
-            CopyConDemo obj2 = new CopyConDemo(obj1);
+            CopyConDemo obj2 = new CopyConDemo(obj1);//loading vales from obj1 to obj2 instance
             obj2.Display();
             Console.WriteLine();
             obj1.balance = 1000.00;

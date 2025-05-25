@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Delegates;
 
 namespace Delegates
 {
-    public delegate void MathDelegate(int a, int b);
+    
     internal class DelDemo2
     {
         public void Add(int x, int y)

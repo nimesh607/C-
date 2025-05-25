@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Delegates;
+
 
 namespace Delegates
 {
     //Note: while defining a delegate you should follow the same signature of the method i.e., parameters of delegateshould be same as the parameters of method and return types of delegates should be same as the return types of method, we want to call by using the delegate.
 
-    public delegate void CalculatorDelegate(int a,int b,int c);//Step1:Definition of a delegate 
-    public delegate string WishDelegate(string Name);
+  
     internal class DelDemo1
     {
         public void AddNums(int x, int y, int z)

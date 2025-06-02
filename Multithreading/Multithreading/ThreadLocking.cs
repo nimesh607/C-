@@ -21,7 +21,7 @@ namespace Multithreading
         static void Main(string[] args)
         {
             ThreadLocking obj = new ThreadLocking();
-          //  obj.Display();
+            //obj.Display();
             //obj.Display();
             //obj.Display();
             Thread t1 =new Thread(obj.Display);
@@ -32,6 +32,8 @@ namespace Multithreading
             t1.Start();
             t2.Start();
             t3.Start();
+           
+                
         }
     }
 }

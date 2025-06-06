@@ -22,20 +22,28 @@ namespace Multithreading
 
         static void Main(string[] args)
         {
-           // ThreadStart obj = new ThreadStart(Test);//explicitly instantiating delegate in Test1 we directly pass the methos and CLR will implicitly instantiate delegate and bound the method with delegate .
-                                                    //2nd way instanting method with delegate 
-                                                    // ThreadStart obj1 = Test
-                                                    // 3rd way 
-           // ThreadStart obj = delegate { Test(); };
-           //4th way
-            //ThreadStart obj= () => Test();
-           // Thread thread = new Thread(obj); //or Thread t = new Thread(Test);
-           //ParameterisedThreadStart obj will take object as a parameter
-           ParameterizedThreadStart threadStart = new ParameterizedThreadStart(Test);
+            // Multiple ways to create threads in C#
+
+            // 1️⃣ Explicit delegate creation (non-parameterized):
+            // ThreadStart obj = new ThreadStart(Test); // Works only if Test has no parameters
+
+            // 2️⃣ Implicit delegate assignment:
+            // ThreadStart obj = Test;
+
+            // 3️⃣ Anonymous delegate:
+            // ThreadStart obj = delegate { Test(); };
+
+            // 4️⃣ Lambda expression:
+            // ThreadStart obj = () => Test();
+            // Thread thread = new Thread(obj); //or Thread t = new Thread(Test);
+            //ParameterisedThreadStart obj will take object as a parameter
+            ParameterizedThreadStart threadStart = new ParameterizedThreadStart(Test);
             Thread t = new Thread(threadStart);
             t.Start(50);//Be carefull currently it is not type safe it can take any datatype and will runtime exception
-            
-            
+
+            // NOTE: Since ParameterizedThreadStart takes 'object', there's a risk of passing incompatible types at runtime.
+            // Consider using lambda with strongly typed variables if using .NET 4.0+ or switch to Tasks for better type safety.
+
         }
     }
 }

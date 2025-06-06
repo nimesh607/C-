@@ -31,15 +31,20 @@ namespace Multithreading
         {
             Thread t1 = new Thread(IncrementCount1);
             Thread t2 = new Thread(IncrementCount2);
+            // Set thread priorities — t2 has a higher priority than t1
             t1.Priority=System.Threading.ThreadPriority.Lowest;
             t2.Priority=System.Threading.ThreadPriority.Highest;
+            // Set thread priorities — t2 has a higher priority than t1
             t1.Start();
             t2.Start();
             Console.WriteLine("Main thread going to sleep");
+            // Sleep main thread to allow t1 and t2 to run for 10 seconds
             Thread.Sleep(10000);
+            // Signal threads to stop
             stop = true;
             //  t1.Abort();//Deprecated
             //t2.Abort();
+            // Wait for both threads to finish execution
             t1.Join();
             t2.Join();
 

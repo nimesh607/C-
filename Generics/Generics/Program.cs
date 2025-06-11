@@ -9,8 +9,8 @@ namespace Generics
          * Although this allows any data type to be passed (because all types inherit from object),
          * there are three main disadvantages:
          * 
-         * 1. **Lack of Type Safety** – This allows comparing values of different types (e.g., int vs string), which is usually undesirable.
-         * 2. **Runtime Errors** – Type mismatches may only show errors at runtime, not compile time.
+         * 1. **Lack of Type Safety** – This allows comparing values of different types (e.g., int vs string), which is usually undesirable.eg:AreEqual(10, "10");This will compile just fine, but it's comparing an int and a string, which makes no real sense logically.You won’t know it’s a bad comparison until runtime — it could even silently return false.
+         * 2. **Runtime Errors** – Type mismatches may only show errors at runtime, not compile time.eg:AreEqual(10, null);It could throw a NullReferenceException if you’re not handling null properly.Even worse, it won’t catch type mismatch errors at compile time, so bugs can slip in easily.
          * 3. **Boxing and Unboxing Overhead** – For value types like int or double, boxing (converting to object) and unboxing (back to original type) occur, which affects performance.
          * 
          * For example, comparing two integers using objects involves converting them to object type first, which is inefficient.

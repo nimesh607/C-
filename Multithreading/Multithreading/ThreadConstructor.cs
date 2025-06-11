@@ -24,16 +24,16 @@ namespace Multithreading
         {
             // Multiple ways to create threads in C#
 
-            // 1️⃣ Explicit delegate creation (non-parameterized):
-            // ThreadStart obj = new ThreadStart(Test); // Works only if Test has no parameters
+            // 1️) Explicit delegate creation (non-parameterized):
+           //  ThreadStart obj = new ThreadStart(Test); // Works only if Test has no parameters
 
-            // 2️⃣ Implicit delegate assignment:
+            // 2️) Implicit delegate assignment:
             // ThreadStart obj = Test;
 
-            // 3️⃣ Anonymous delegate:
+            // 3️) Anonymous delegate:
             // ThreadStart obj = delegate { Test(); };
 
-            // 4️⃣ Lambda expression:
+            // 4️) Lambda expression:
             // ThreadStart obj = () => Test();
             // Thread thread = new Thread(obj); //or Thread t = new Thread(Test);
             //ParameterisedThreadStart obj will take object as a parameter

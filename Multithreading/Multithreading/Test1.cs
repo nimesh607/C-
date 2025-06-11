@@ -23,7 +23,7 @@ namespace Multithreading
             for (int i = 0; i <= 100; i++)
             {
                 Console.WriteLine("Test 2  : " + i);
-                if (i == 50)
+                if (i == 10)
                 {
                     Console.WriteLine("Thread 2 is going to sleep");
                     Thread.Sleep(5000);
@@ -46,12 +46,18 @@ namespace Multithreading
 
         static void Main(string[] args)
         {
-            Thread T1 = new Thread(Test);
+      /*      //Single Thread version
+            Test1.Test();
+            Test1.Test2();
+            Test1.Test3();
+*/
+            //Multi-Thread Version
+            /* Thread T1 = new Thread(Test);
             Thread T2 = new Thread(Test2);
             Thread T3 = new Thread(Test3);
             T1.Start();
             T2.Start();
-            T3.Start();
+            T3.Start();*/
 
             Console.WriteLine("Thread Main is exiting");
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,15 +10,23 @@ namespace Multithreading
 {
     internal class ThreadConstructor
     {
-        static void Test(object max)
+        /*  static void Test() //this is signature is exactly matched  threadstart delegate (non value returning and doesnt accept any parameters)
+          {
+              for (int i = 0; i <= 50; i++)
+              {
+                  Console.WriteLine("Test : " + i);
+
+              }
+          }*/
+        static void Test(object max)//this method signature is matching parameterisedThreadStart Delegate i.e.,non returning and accepting object type parameter
         {
-            int num = Convert.ToInt32(max);
+            int num = Convert.ToInt32(max);//casted into int from obj
             for (int i = 0; i <= num; i++)
             {
                 Console.WriteLine("Test : " + i);
 
             }
-            
+
         }
 
         static void Main(string[] args)
@@ -25,7 +34,11 @@ namespace Multithreading
             // Multiple ways to create threads in C#
 
             // 1️) Explicit delegate creation (non-parameterized):
-           //  ThreadStart obj = new ThreadStart(Test); // Works only if Test has no parameters
+            //ThreadStart is delegate .it is non value returning and no parameters 
+
+            //ThreadStart obj = new ThreadStart(Test); // Instantiating and  binding  method with delegate , Works only if Test has no parameters.or you can also directly pass method without  creating delegate Internally CLR will create  instance of ThreadStart(Delegate) and pass method as a parameter. like this Thread  t = new Thread(Test).
+
+            //Thread  t = new Thread(obj);//This is after delegate creation explicitly. 
 
             // 2️) Implicit delegate assignment:
             // ThreadStart obj = Test;
@@ -38,7 +51,9 @@ namespace Multithreading
             // Thread thread = new Thread(obj); //or Thread t = new Thread(Test);
             //ParameterisedThreadStart obj will take object as a parameter
             ParameterizedThreadStart threadStart = new ParameterizedThreadStart(Test);
-            Thread t = new Thread(threadStart);
+            Thread t = new Thread(threadStart);//there are four  constructor overloads are available under the Thread Class:
+                                               //1)(ParameterisedThreadStart start) ,2)(ThreadStart start),3(ParameterisedThreadStart start,maxStackSize),4)(ThreadStart start,maxStackSize).
+
             t.Start(50);//Be carefull currently it is not type safe it can take any datatype and will runtime exception
 
             // NOTE: Since ParameterizedThreadStart takes 'object', there's a risk of passing incompatible types at runtime.

@@ -8,7 +8,7 @@ namespace TPLProject
 {
     internal class Class1
     {
-        static void Print1()
+        static void Print1()//non returning not accepting any parameter
         {
             for (int i = 1; i <= 100; i++)
             {
@@ -31,13 +31,13 @@ namespace TPLProject
         }
 
         static void Main()
-        {
+        {    //MultiThreaded model.Created thread for each method
             //Thread is applying "Time Sharing " Principle
-            Thread t1 = new Thread(Print1);
+            Thread t1 = new Thread(Print1);//directly passed method to instance and CLR will make internally create instance of delegate and bound it with method
             Thread t2 = new Thread(Print2);
             Thread t3 = new Thread(Print3);
-            t1.Start(); t2.Start(); t3.Start();
-            t1.Join();t2.Join(); t3.Join();
+           t1.Start(); t2.Start(); t3.Start();
+           t1.Join();t2.Join(); t3.Join();
         }
     }
 }

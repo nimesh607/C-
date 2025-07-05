@@ -8,7 +8,7 @@ namespace TPLProject
 {
     internal class Class3
     {
-        static int GetLength()
+        static int GetLength()//value returning without parameters
         {
             string str = "";
             for (int i = 1; i <= 100000; i++)
@@ -26,6 +26,13 @@ namespace TPLProject
         static void Main()
         {
             //Calling value returning methods with-out parameters by using Tasks
+           
+            /*Task<int> t1 = new Task<int>(GetLength);
+            Task<int> t2 = new Task<int>(ToUpper);
+            t1.Start();
+            t2.Start();*/
+
+            //Alternative way 
             Task<int> t1 = Task.Factory.StartNew(GetLength);
             Task<string> t2 = Task.Factory.StartNew(ToUpper);
             int result1= t1.Result;//Result is obtained after the method execution.so result will call wait internally.

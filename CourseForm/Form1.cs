@@ -49,15 +49,18 @@ namespace CourseForm
                     Amt -= (Convert.ToInt32(rb.Tag) * Count); // If the radio button is unchecked, we subtract the value from the total amount.
                 }
             }
+            txtFees.Text = Amt.ToString();
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
             foreach(Control c in gbCourses.Controls)
-            { 
-                    /*  CheckBox cb = (CheckBox)c;
-                      cb.Checked = false; // Uncheck all checkboxes.*/
-                    ((CheckBox)c).Checked = false; // Uncheck all checkboxes using the Checked property.
+            {
+                if (c is CheckBox cb)
+                {
+                    cb.Checked = false;
+                } // Uncheck all checkboxes.
+                  // ((CheckBox)c).Checked = false; // Uncheck all checkboxes using the Checked property.
             }
             foreach (Control ctrl in this.Controls)
             {

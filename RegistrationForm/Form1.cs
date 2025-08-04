@@ -22,6 +22,7 @@ namespace RegistrationForm
                     tb.Clear();//it is defined in the TextBoxBase class
                 }
             }
+            txtPassword.Enabled = txtConfirmPassword.Enabled = true;
             txtName.Focus(); // Set focus back to the Name textbox
         }
 
@@ -52,16 +53,66 @@ namespace RegistrationForm
          */
         private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            TextBox tb = (TextBox)sender; // Cast sender to TextBox
             if (txtName.Text.Trim().Length == 0)
             {
                 MessageBox.Show("Name cannot be empty!", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 e.Cancel = true; // Cancel the event to prevent focus loss
+                return;
             }
-            /*  else if (txtName.Text.Length < 3)
-              {
-                  MessageBox.Show("Name must be at least 3 characters long!", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                  e.Cancel = true; // Cancel the event to prevent focus loss
-              }*/
+            if (tb.Name == "txtName")
+            {
+                if (tb.Text.Trim().Length < 8)
+                {
+                    MessageBox.Show("Password should be at least  8 to 16 characters long!", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Cancel = true; // Cancel the event to prevent focus loss
+                    return;
+                }
+            }
+            if (tb.Name == "txtConfirmPassword")
+            {
+                if (txtPassword.Text != txtConfirmPassword.Text)
+                {
+                    DialogResult dr = MessageBox.Show("Password and Confirm Password do not match!\n\n Do you remember the password", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dr == DialogResult.Yes)
+                    {
+                        txtConfirmPassword.Clear();
+                        txtConfirmPassword.Focus();
+                    }
+                    else
+                    {
+                        txtPassword.Clear();
+                        txtConfirmPassword.Clear();
+                        txtPassword.Focus();
+
+                    }
+                    return;
+                }
+                txtPassword.Enabled = txtConfirmPassword.Enabled = false; // Disable password fields after validation
+            }
         }
-    } 
+
+        private void txtDob_TypeValidationCompleted(object sender, TypeValidationEventArgs e)
+        {
+            MessageBox.Show("Length:" + txtDob.Text.Replace("/", "").Trim().Length);
+            if (txtDob.Text.Replace("/", "").Trim().Length == 0)
+            {
+                MessageBox.Show("Date of Birth cannot be empty!", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Cancel = true;
+            }
+            else
+            {
+                bool status = DateTime.TryParseExact(txtDob.Text, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dt);
+                if (status)
+                {
+                    MessageBox.Show(dt.ToString());
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Date Format! Please enter in dd/MM/yyyy format.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+        }
+    }
 }

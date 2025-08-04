@@ -75,6 +75,7 @@
             txtDob.Size = new Size(251, 27);
             txtDob.TabIndex = 3;
             txtDob.ValidatingType = typeof(DateTime);
+            txtDob.TypeValidationCompleted += txtDob_TypeValidationCompleted;
             // 
             // txtConfirmPassword
             // 

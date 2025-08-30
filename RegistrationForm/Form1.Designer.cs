@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             txtName = new TextBox();
-            txtPassword = new TextBox();
-            txtDob = new MaskedTextBox();
-            txtConfirmPassword = new TextBox();
-            txtMobile = new MaskedTextBox();
+            txtPwd = new TextBox();
+            mtbDob = new MaskedTextBox();
+            txtCPwd = new TextBox();
+            mtbMobile = new MaskedTextBox();
             txtEmail = new TextBox();
-            txtAdd = new TextBox();
+            txtAddress = new TextBox();
             lblUserName = new Label();
             lblDOB = new Label();
             lblPassword = new Label();
@@ -59,39 +59,42 @@
             txtName.Leave += txtName_Leave;
             txtName.Validating += txtName_Validating;
             // 
-            // txtPassword
+            // txtPwd
             // 
-            txtPassword.Location = new Point(206, 153);
-            txtPassword.Name = "txtPassword";
-            txtPassword.PasswordChar = '*';
-            txtPassword.Size = new Size(251, 27);
-            txtPassword.TabIndex = 1;
+            txtPwd.Location = new Point(206, 153);
+            txtPwd.Name = "txtPwd";
+            txtPwd.PasswordChar = '*';
+            txtPwd.Size = new Size(251, 27);
+            txtPwd.TabIndex = 1;
+            txtPwd.Validating += txtName_Validating;
             // 
-            // txtDob
+            // mtbDob
             // 
-            txtDob.Location = new Point(206, 265);
-            txtDob.Mask = "00/00/0000";
-            txtDob.Name = "txtDob";
-            txtDob.Size = new Size(251, 27);
-            txtDob.TabIndex = 3;
-            txtDob.ValidatingType = typeof(DateTime);
-            txtDob.TypeValidationCompleted += txtDob_TypeValidationCompleted;
+            mtbDob.Location = new Point(206, 265);
+            mtbDob.Mask = "00/00/0000";
+            mtbDob.Name = "mtbDob";
+            mtbDob.Size = new Size(251, 27);
+            mtbDob.TabIndex = 3;
+            mtbDob.ValidatingType = typeof(DateTime);
+            mtbDob.Validating += mtbDob_Validating;
             // 
-            // txtConfirmPassword
+            // txtCPwd
             // 
-            txtConfirmPassword.Location = new Point(206, 209);
-            txtConfirmPassword.Name = "txtConfirmPassword";
-            txtConfirmPassword.PasswordChar = '*';
-            txtConfirmPassword.Size = new Size(251, 27);
-            txtConfirmPassword.TabIndex = 2;
+            txtCPwd.Location = new Point(206, 209);
+            txtCPwd.Name = "txtCPwd";
+            txtCPwd.PasswordChar = '*';
+            txtCPwd.Size = new Size(251, 27);
+            txtCPwd.TabIndex = 2;
+            txtCPwd.Validating += txtName_Validating;
             // 
-            // txtMobile
+            // mtbMobile
             // 
-            txtMobile.Location = new Point(206, 321);
-            txtMobile.Mask = "00 0000 0000 00";
-            txtMobile.Name = "txtMobile";
-            txtMobile.Size = new Size(251, 27);
-            txtMobile.TabIndex = 4;
+            mtbMobile.Location = new Point(206, 321);
+            mtbMobile.Mask = " ";
+            mtbMobile.Name = "mtbMobile";
+            mtbMobile.Size = new Size(251, 27);
+            mtbMobile.TabIndex = 4;
+            mtbMobile.KeyPress += mtbMobile_KeyPress;
             // 
             // txtEmail
             // 
@@ -100,15 +103,15 @@
             txtEmail.Size = new Size(251, 27);
             txtEmail.TabIndex = 5;
             // 
-            // txtAdd
+            // txtAddress
             // 
-            txtAdd.Location = new Point(206, 433);
-            txtAdd.Multiline = true;
-            txtAdd.Name = "txtAdd";
-            txtAdd.ScrollBars = ScrollBars.Both;
-            txtAdd.Size = new Size(251, 104);
-            txtAdd.TabIndex = 6;
-            txtAdd.WordWrap = false;
+            txtAddress.Location = new Point(206, 433);
+            txtAddress.Multiline = true;
+            txtAddress.Name = "txtAddress";
+            txtAddress.ScrollBars = ScrollBars.Both;
+            txtAddress.Size = new Size(251, 104);
+            txtAddress.TabIndex = 6;
+            txtAddress.WordWrap = false;
             // 
             // lblUserName
             // 
@@ -249,12 +252,12 @@
             Controls.Add(lblMobileNumber);
             Controls.Add(lblDOB);
             Controls.Add(lblUserName);
-            Controls.Add(txtAdd);
+            Controls.Add(txtAddress);
             Controls.Add(txtEmail);
-            Controls.Add(txtMobile);
-            Controls.Add(txtConfirmPassword);
-            Controls.Add(txtDob);
-            Controls.Add(txtPassword);
+            Controls.Add(mtbMobile);
+            Controls.Add(txtCPwd);
+            Controls.Add(mtbDob);
+            Controls.Add(txtPwd);
             Controls.Add(txtName);
             Name = "Form1";
             Text = "Form1";
@@ -265,12 +268,12 @@
         #endregion
 
         private TextBox txtName;
-        private TextBox txtPassword;
-        private MaskedTextBox txtDob;
-        private TextBox txtConfirmPassword;
-        private MaskedTextBox txtMobile;
+        private TextBox txtPwd;
+        private MaskedTextBox mtbDob;
+        private TextBox txtCPwd;
+        private MaskedTextBox mtbMobile;
         private TextBox txtEmail;
-        private TextBox txtAdd;
+        private TextBox txtAddress;
         private Label lblUserName;
         private Label lblDOB;
         private Label lblPassword;

@@ -22,7 +22,7 @@ namespace RegistrationForm
                     tb.Clear();//it is defined in the TextBoxBase class
                 }
             }
-            txtPassword.Enabled = txtConfirmPassword.Enabled = true;
+            txtPwd.Enabled = txtCPwd.Enabled = true;
             txtName.Focus(); // Set focus back to the Name textbox
         }
 
@@ -53,14 +53,16 @@ namespace RegistrationForm
          */
         private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            /*
             TextBox tb = (TextBox)sender; // Cast sender to TextBox
-            if (txtName.Text.Trim().Length == 0)
+            if (tb.Text.Trim().Length == 0)
             {
-                MessageBox.Show("Name cannot be empty!", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                e.Cancel = true; // Cancel the event to prevent focus loss
+                MessageBox.Show("you can't leave field to be empty!", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Cancel = true; // Cancel will not allow the focus to leave the TextBox
                 return;
+             
             }
-            if (tb.Name == "txtName")
+            if (tb.Name != "txtName")
             {
                 if (tb.Text.Trim().Length < 8)
                 {
@@ -69,50 +71,69 @@ namespace RegistrationForm
                     return;
                 }
             }
-            if (tb.Name == "txtConfirmPassword")
+            if (tb.Name == "txtCPwd")
             {
-                if (txtPassword.Text != txtConfirmPassword.Text)
+                if (txtPwd.Text != txtCPwd.Text)
                 {
                     DialogResult dr = MessageBox.Show("Password and Confirm Password do not match!\n\n Do you remember the password", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dr == DialogResult.Yes)
                     {
-                        txtConfirmPassword.Clear();
-                        txtConfirmPassword.Focus();
+                        txtCPwd.Clear();
+                        txtCPwd.Focus();
                     }
                     else
                     {
-                        txtPassword.Clear();
-                        txtConfirmPassword.Clear();
-                        txtPassword.Focus();
+                        txtPwd.Clear();
+                        txtCPwd.Clear();
+                        txtPwd.Focus();
 
                     }
                     return;
                 }
-                txtPassword.Enabled = txtConfirmPassword.Enabled = false; // Disable password fields after validation
+                        txtPwd.Enabled = txtCPwd.Enabled = false; // Disable password fields after validation
             }
+            */
         }
 
-        private void txtDob_TypeValidationCompleted(object sender, TypeValidationEventArgs e)
+
+
+        private void mtbDob_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MessageBox.Show("Length:" + txtDob.Text.Replace("/", "").Trim().Length);
-            if (txtDob.Text.Replace("/", "").Trim().Length == 0)
+
+            if (!mtbDob.MaskFull && string.IsNullOrWhiteSpace(mtbDob.Text.Replace("/", "").Replace("-", "").Trim()))
             {
                 MessageBox.Show("Date of Birth cannot be empty!", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 e.Cancel = true;
+                return;
             }
             else
             {
-                bool status = DateTime.TryParseExact(txtDob.Text, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dt);
+                //Try and TryParse will convert string into default datatime form i.e:MM/DD/YYYY .but i am expecting DD/MM/YYYY so for that use TryExact.it takes 5 parameters.
+                MessageBox.Show(mtbDob.Text.Replace("/", "").Replace("_", "").Trim());
+                bool status = DateTime.TryParseExact(mtbDob.Text, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dt);//tryparse will generate output in boolean so i have stored it into bool
                 if (status)
                 {
-                    MessageBox.Show(dt.ToString());
+                    if (dt > DateTime.Now.AddYears(-18))
+                    {
+                        MessageBox.Show("You need to attain 18 years to register", "Age Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        e.Cancel = true;
+                        return;
+                    }
+
                 }
                 else
                 {
                     MessageBox.Show("Invalid Date Format! Please enter in dd/MM/yyyy format.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Cancel = true;
+                    return;
                 }
 
             }
+        }
+
+        private void mtbMobile_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
         }
     }
 }

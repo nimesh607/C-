@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace RegistrationForm
 {
     public partial class Form1 : Form
@@ -30,7 +32,18 @@ namespace RegistrationForm
         {
             DialogResult dr = MessageBox.Show("Are you Sure of closing the form?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);//dialog result is returned from the message box
             if (dr == DialogResult.Yes)
+            {
+                foreach(Control ctrl in this.Controls)
+                {
+                    if(ctrl is TextBoxBase)
+                    {
+                        ctrl.CausesValidation = false;//CausesValidation is common property for all control 
+                    }
+                    
+                }
+                txtName.CausesValidation = false;
                 this.Close();
+            }
             else
                 return;
 
@@ -53,14 +66,14 @@ namespace RegistrationForm
          */
         private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            /*
+
             TextBox tb = (TextBox)sender; // Cast sender to TextBox
             if (tb.Text.Trim().Length == 0)
             {
                 MessageBox.Show("you can't leave field to be empty!", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 e.Cancel = true; // Cancel will not allow the focus to leave the TextBox
                 return;
-             
+
             }
             if (tb.Name != "txtName")
             {
@@ -90,12 +103,10 @@ namespace RegistrationForm
                     }
                     return;
                 }
-                        txtPwd.Enabled = txtCPwd.Enabled = false; // Disable password fields after validation
+                txtPwd.Enabled = txtCPwd.Enabled = false; // Disable password fields after validation
             }
-            */
+
         }
-
-
 
         private void mtbDob_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -133,7 +144,59 @@ namespace RegistrationForm
 
         private void mtbMobile_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (Char.IsDigit(e.KeyChar) == false && Convert.ToInt32(e.KeyChar) != 8)
+            {
+                MessageBox.Show("Please enter numeric values only.", "Numeric Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Handled = true;//it will not allow to character inside tb
+            }
+        }
 
+        private void txtName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                MessageBox.Show("Please enter only Alphabets .", "Letters Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Handled = true;
+            }
+        }
+
+        private void txtPwd_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetterOrDigit(e.KeyChar) == false && e.KeyChar != (char)Keys.Back && "!@#$%^&*()-_=+[]{};:,.<>?/|\\`~".IndexOf(e.KeyChar) == -1)
+            {
+                MessageBox.Show("Please enter only letters or digits.",
+                                "Password Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                e.Handled = true;
+            }
+        }
+
+        private void mtbMobile_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (mtbMobile.Text.Trim().Length > 0)
+            {
+                Regex rg = new Regex(@"^[6-9]\d{9}$");
+                if (!rg.IsMatch(mtbMobile.Text))
+                {
+                    MessageBox.Show("Invalid Mobile No.Format.", "Mobile No.Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void txtEmail_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (txtEmail.Text.Trim().Length > 0)
+            {
+                Regex rg = new Regex(@"^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$");
+
+                if (!rg.IsMatch(txtEmail.Text))
+                {
+                    MessageBox.Show("Invalid Email Format.", "Email.Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Cancel = true;
+                }
+            }
         }
     }
 }

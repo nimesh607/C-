@@ -41,7 +41,7 @@ namespace RegistrationForm
                     }
                     
                 }
-                txtName.CausesValidation = false;
+              //  txtName.CausesValidation = false;
                 this.Close();
             }
             else
@@ -49,10 +49,6 @@ namespace RegistrationForm
 
         }
 
-        private void txtName_Leave(object sender, EventArgs e)
-        {
-
-        }
 
         /*
          Event args:
@@ -153,11 +149,14 @@ namespace RegistrationForm
 
         private void txtName_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            if (char.IsControl(e.KeyChar) || char.IsLetter(e.KeyChar) || char.IsSeparator(e.KeyChar))
             {
-                MessageBox.Show("Please enter only Alphabets .", "Letters Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                e.Handled = true;
+                return; // Allow the character
             }
+
+            // Block all other characters
+            MessageBox.Show("Please enter only alphabetic characters.", "Letters Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            e.Handled = true;
         }
 
         private void txtPwd_KeyPress(object sender, KeyPressEventArgs e)

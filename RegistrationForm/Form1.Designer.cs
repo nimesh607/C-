@@ -58,7 +58,7 @@
             txtName.Size = new Size(220, 23);
             txtName.TabIndex = 0;
             txtName.KeyPress += txtName_KeyPress;
-            txtName.Leave += txtName_Leave;
+  
             txtName.Validating += txtName_Validating;
             // 
             // txtPwd

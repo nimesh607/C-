@@ -48,5 +48,95 @@ namespace DemoCbLbClb
                 }
             }
         }
+
+        /*Acessing all items from list controls:
+     <ListControl>.Items => returns Object[]
+     How to access selected items from list controls:
+     Combobox:
+                   Property         returns
+                   SelectedItem      Object
+                   SelectedIndex     int
+                   Text             string
+     ListBox:
+                   Property         returns
+                   SelectedItem      Object
+                   SelectedIndex     int
+                   SelectedItems     Object[]
+                   SelectedIndices   int[]
+     CheckedListBox:
+                   Property         returns
+                   SelectedItem      Object
+                   SelectedIndex     int
+                   SelectedItems     Object[]
+                  SelectedIndices   int[]
+                  CheckedItems      Object[]
+                  CheckedIndices    int[]
+     Note: In CheckedListBox user can select items using checkboxes but SelectedItems and SelectedIndices properties return only those items which are selected by mouse click or keyboard navigation.
+     */
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+        
+            MessageBox.Show(" Selected Country: "+comboBox1.Text);
+            MessageBox.Show(" Selected Country:"+comboBox1.SelectedItem);//when you are concatenating you don't require to string()
+               MessageBox.Show(" Selected Index: " + comboBox1.Items[comboBox1.SelectedIndex]);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            foreach(object item in listBox1.SelectedItems)//its an Object[] so to acess each item we use foreach loop
+            {
+                MessageBox.Show(" Selected State: " + item);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            /* //Old Way
+              String Cities = "";
+             foreach (string item in checkedListBox1.CheckedItems)
+             {
+                 Cities += item + ", ";
+             }
+
+             Cities = Cities.Substring(0, Cities.Length - 2);
+             int position = Cities.LastIndexOf(',');
+             if(position != -1)
+             {
+                 Cities = Cities.Remove(position, 1);
+                 Cities = Cities.Insert(position, " and ");
+             }
+
+             MessageBox.Show("Selected Cities:" + Cities);
+            */
+
+            List<string> selectedCities = new List<string>();
+
+            // Collect all checked items as strings
+            foreach (object item in checkedListBox1.CheckedItems)
+            {
+                selectedCities.Add(item.ToString());
+            }
+
+            string formattedCities = string.Join(", ", selectedCities);
+
+            // Replace last comma with " and "
+            int lastCommaPos = formattedCities.LastIndexOf(',');
+            if (lastCommaPos != -1)
+            {
+                formattedCities = formattedCities.Remove(lastCommaPos, 1)
+                                                 .Insert(lastCommaPos, " and");
+            }
+
+            // Show result
+            MessageBox.Show(formattedCities);
+
+
+        
+        
+        }
+
+
     }
 }

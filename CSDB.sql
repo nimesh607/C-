@@ -1,0 +1,37 @@
+Use Master
+Create Database CSDB
+Go
+Use CSDB
+Create Table Dept (Deptno Int Constraint Deptno_Pk Primary Key, Dname Varchar(50), Location Varchar(50))
+Insert into Dept values(10, 'Marketing', 'Mumbai')
+Insert into Dept values(20, 'Sales', 'Chennai')
+Insert into Dept values(30, 'Finance', 'Delhi')
+Insert into Dept values(40, 'Production', 'Kolkota')
+Go
+Create table Emp (Empno Int Constraint Empno_Pk Primary Key, Ename Varchar(100), Job Varchar(100), Mgr Int, HireDate Date, Salary Money, Comm Money, Deptno Int References Dept(Deptno))
+Insert into Emp Values(1001, 'Scott', 'President', NULL, '01/01/88', 5000, NULL, 10)
+Insert into Emp Values(1002, 'Clark', 'Manager', 1001, '01/01/88', 4000, NULL, 10)
+Insert into Emp Values(1003, 'Smith', 'Manager', 1001, '01/01/90', 3500, 500, 20)
+Insert into Emp Values(1004, 'Vijay', 'Manager', 1001, '01/01/92', 4000, NULL, 30)
+Insert into Emp Values(1005, 'Ajay', 'Salesman', 1003, '02/04/89', 3000, 300, 20)
+Insert into Emp Values(1006, 'John Smith', 'Salesman', 1003, '02/08/88', 3300, 600, 20)
+Insert into Emp Values(1007, 'Venkat', 'Salesman', 1003, '04/15/88', 3300, 0, 20)
+Insert into Emp Values(1008, 'Vinod', 'Clerk', 1003, '01/15/88', 2400, NULL, 20)
+Insert into Emp Values(1009, 'Suneel', 'Clerk', 1004, '05/12/83', 2000, NULL, 30)
+Insert into Emp Values(1010, 'Srinivas', 'Analyst', 1004, '03/01/89', 3400, NULL, 30)
+Insert into Emp Values(1011, 'Smyth', 'Analyst', 1004, '03/01/89', 3600, NULL, 30)
+Insert into Emp Values(1012, 'Madan', 'Analyst', 1004, '01/09/91', 3100, NULL, 30)
+Insert into Emp Values(1013, 'JohnSmith', 'Clerk', 1002, '01/06/88', 1800, NULL, 10)
+Insert into Emp Values(1014, 'Raju', 'Clerk', 1005, '06/01/89', 2300, NULL, 20)
+Insert into Emp Values(1015, 'Ramesh', 'Clerk', 1011, '08/22/90', 2500, NULL, 30)
+Insert into Emp Values(1016, 'Aarush', 'Manager', 1001, '07/15/90', 4200, NULL, 40)
+Insert into Emp Values(1017, 'Sridhar', 'Clerk', 1016, '07/20/90', 2500, NULL, 40)
+Insert into Emp Values(1018, 'Rahul', 'Supervisor', 1016, '08/01/90', 3500, NULL, 40)
+Insert into Emp Values(1019, 'Krishna', 'Fabricator', 1018, '08/12/90', 3100, NULL, 40)
+Insert into Emp Values(1020, 'Aaron', 'Fabricator', 1018, '08/21/90', 2900, NULL, 40)
+Insert into Emp Values(1021, 'Dave', 'Analyst', 1004, '08/22/90', 3500, NULL, 30)
+Insert into Emp Values(1022, 'Kristane', 'Administrator', 1002, '08/22/90', 3000, NULL, 10)
+Insert into Emp Values(1023, 'Sophia', 'Administrator', 1003, '08/22/90', 3000, NULL, 20)
+Insert into Emp Values(1024, 'Racheal', 'Administrator', 1004, '08/22/90', 3000, NULL, 30)
+Insert into Emp Values(1025, 'Elizabeth', 'Administrator', 1016, '08/22/90', 3000, NULL, 40)
+Go
